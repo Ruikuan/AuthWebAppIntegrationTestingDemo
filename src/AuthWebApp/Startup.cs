@@ -34,7 +34,6 @@ namespace AuthWebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            ConfigureAdditionalMiddleware(app);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -50,6 +49,9 @@ namespace AuthWebApp
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
+
+            ConfigureAdditionalMiddleware(app);
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
