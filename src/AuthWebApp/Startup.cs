@@ -51,7 +51,7 @@ namespace AuthWebApp
             app.UseAuthentication();
 
             ConfigureAdditionalMiddleware(app);
-
+          
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
