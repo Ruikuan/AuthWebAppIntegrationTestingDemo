@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Hosting;
 
 namespace AuthWebAppIntegrationTest
 {
     public class TestWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
     {
-        protected override IWebHostBuilder CreateWebHostBuilder()
+        protected override IHostBuilder CreateHostBuilder()
         {
-            return WebHost.CreateDefaultBuilder(null)
-                       .UseStartup<TestServerStartup>(); //UseStartup have no relations with type parameter TEntryPoint, use our all new TestServerStartup here.
+            return base.CreateHostBuilder().ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<TestServerStartup>();
+            });
         }
     }
 }
